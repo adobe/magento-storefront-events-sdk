@@ -25,6 +25,9 @@ import {
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
+  SEARCH_REQUEST_SENT,
+  SEARCH_RESPONSE_RECEIVED,
+  SEARCH_RESULT_CLICK,
   SIGN_IN,
   SIGN_OUT,
   UPDATE_CART,
@@ -236,6 +239,51 @@ describe("events", () => {
     expect(eventHandler).toHaveBeenCalledTimes(1);
     mdl.unsubscribe.removeFromCart(eventHandler);
     mdl.publish.removeFromCart();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+  });
+
+  test("search request sent", async () => {
+    const eventHandler = jest.fn((eventObj, mdl) => {
+      expect(eventObj.event).toEqual(SEARCH_REQUEST_SENT);
+      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    });
+
+    mdl.subscribe.searchRequestSent(eventHandler);
+    expect(eventHandler).not.toHaveBeenCalled();
+    mdl.publish.searchRequestSent();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+    mdl.unsubscribe.searchRequestSent(eventHandler);
+    mdl.publish.searchRequestSent();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+  });
+
+  test("search response received", async () => {
+    const eventHandler = jest.fn((eventObj, mdl) => {
+      expect(eventObj.event).toEqual(SEARCH_RESPONSE_RECEIVED);
+      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    });
+
+    mdl.subscribe.searchResponseReceived(eventHandler);
+    expect(eventHandler).not.toHaveBeenCalled();
+    mdl.publish.searchResponseReceived();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+    mdl.unsubscribe.searchResponseReceived(eventHandler);
+    mdl.publish.searchResponseReceived();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+  });
+
+  test("search result click", async () => {
+    const eventHandler = jest.fn((eventObj, mdl) => {
+      expect(eventObj.event).toEqual(SEARCH_RESULT_CLICK);
+      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    });
+
+    mdl.subscribe.searchResultClick(eventHandler);
+    expect(eventHandler).not.toHaveBeenCalled();
+    mdl.publish.searchResultClick();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+    mdl.unsubscribe.searchResultClick(eventHandler);
+    mdl.publish.searchResultClick();
     expect(eventHandler).toHaveBeenCalledTimes(1);
   });
 

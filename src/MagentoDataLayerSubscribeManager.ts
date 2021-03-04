@@ -15,6 +15,9 @@ import {
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
+  SEARCH_REQUEST_SENT,
+  SEARCH_RESPONSE_RECEIVED,
+  SEARCH_RESULT_CLICK,
   SIGN_IN,
   SIGN_OUT,
   UPDATE_CART,
@@ -84,6 +87,27 @@ export default class MagentoDataLayerSubscribeManager extends MagentoDataLayerBa
   }
 
   /**
+   * Subscribe to Search Request Sent event
+   */
+  searchRequestSent(handler: MagentoDataLayerEventHandler): void {
+    this.addEventListener(SEARCH_REQUEST_SENT, handler);
+  }
+
+  /**
+   * Subscribe to Search Response Received event
+   */
+  searchResponseReceived(handler: MagentoDataLayerEventHandler): void {
+    this.addEventListener(SEARCH_RESPONSE_RECEIVED, handler);
+  }
+
+  /**
+   * Subscribe to Search Result Click event
+   */
+  searchResultClick(handler: MagentoDataLayerEventHandler): void {
+    this.addEventListener(SEARCH_RESULT_CLICK, handler);
+  }
+
+  /**
    * Subscribe to Sign In event
    */
   signIn(handler: MagentoDataLayerEventHandler): void {
@@ -97,7 +121,7 @@ export default class MagentoDataLayerSubscribeManager extends MagentoDataLayerBa
     this.addEventListener(SIGN_OUT, handler);
   }
 
-  /** 
+  /**
    * Subscribe to Update Cart event
    */
   updateCart(handler: MagentoDataLayerEventHandler): void {

@@ -13,6 +13,9 @@ import {
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
+  SEARCH_REQUEST_SENT,
+  SEARCH_RESPONSE_RECEIVED,
+  SEARCH_RESULT_CLICK,
   SIGN_IN,
   SIGN_OUT,
   UPDATE_CART,
@@ -82,6 +85,27 @@ export default class MagentoDataLayerPublishManager extends MagentoDataLayerBase
   }
 
   /**
+   * Publish Search Request Sent event
+   */
+  searchRequestSent(): void {
+    this.pushEvent(SEARCH_REQUEST_SENT);
+  }
+
+  /**
+   * Publish Search Response Received event
+   */
+  searchResponseReceived(): void {
+    this.pushEvent(SEARCH_RESPONSE_RECEIVED);
+  }
+
+  /**
+   * Publish Search Result Click event
+   */
+  searchResultClick(): void {
+    this.pushEvent(SEARCH_RESULT_CLICK);
+  }
+
+  /**
    * Publish Sign In event
    */
   signIn(): void {
@@ -99,6 +123,6 @@ export default class MagentoDataLayerPublishManager extends MagentoDataLayerBase
    * Publish Cart Update events
    */
   updateCart(): void {
-    this.pushEvent(UPDATE_CART)
+    this.pushEvent(UPDATE_CART);
   }
 }

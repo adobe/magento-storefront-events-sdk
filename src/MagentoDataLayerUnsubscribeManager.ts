@@ -14,6 +14,9 @@ import {
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
+  SEARCH_REQUEST_SENT,
+  SEARCH_RESPONSE_RECEIVED,
+  SEARCH_RESULT_CLICK,
   SIGN_IN,
   SIGN_OUT,
   UPDATE_CART,
@@ -25,6 +28,7 @@ export default class MagentoDataLayerUnsubscribeManager extends MagentoDataLayer
     super();
     this.mdl = mdl;
   }
+
   /**
    *  Unsubscribe from Add to Cart event
    */
@@ -79,6 +83,27 @@ export default class MagentoDataLayerUnsubscribeManager extends MagentoDataLayer
    */
   removeFromCart(handler: MagentoDataLayerEventHandler): void {
     this.removeEventListener(REMOVE_FROM_CART, handler);
+  }
+
+  /**
+   * Unsubscribe from Search Request Sent event
+   */
+  searchRequestSent(handler: MagentoDataLayerEventHandler): void {
+    this.removeEventListener(SEARCH_REQUEST_SENT, handler);
+  }
+
+  /**
+   * Unsubscribe from Search Response Received event
+   */
+  searchResponseReceived(handler: MagentoDataLayerEventHandler): void {
+    this.removeEventListener(SEARCH_RESPONSE_RECEIVED, handler);
+  }
+
+  /**
+   * Unsubscribe from Search Result Click event
+   */
+  searchResultClick(handler: MagentoDataLayerEventHandler): void {
+    this.removeEventListener(SEARCH_RESULT_CLICK, handler);
   }
 
   /**
