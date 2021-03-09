@@ -380,6 +380,9 @@ describe("events", () => {
       { "shopper-context": { shopperId: "logged-in" } },
       expect.anything()
     );
+    mdl.unsubscribe.dataLayerChange(handler);
+    mdl.context.setShopper({ shopperId: "guest" });
+    expect(handler).toHaveBeenCalledTimes(4);
   });
 
   test("subscribing to all data layer context changes on specific path", () => {
@@ -402,6 +405,9 @@ describe("events", () => {
     expect(handler).not.toHaveBeenCalled();
     mdl.publish.addToCart();
     mdl.publish.customUrl();
+    mdl.publish.initiateCheckout();
+    expect(handler).toHaveBeenCalledTimes(3);
+    mdl.unsubscribe.dataLayerEvent(handler);
     mdl.publish.initiateCheckout();
     expect(handler).toHaveBeenCalledTimes(3);
   });

@@ -7,6 +7,8 @@ import { MagentoDataLayerBase } from "./MagentoDataLayerBase";
 import {
   ADD_TO_CART,
   CUSTOM_URL,
+  DATA_LAYER_CHANGE,
+  DATA_LAYER_EVENT,
   INITIATE_CHECKOUT,
   MagentoDataLayerEventHandler,
   PAGE_ACTIVITY_SUMMARY,
@@ -42,6 +44,20 @@ export default class MagentoDataLayerUnsubscribeManager extends MagentoDataLayer
    */
   customUrl(handler: MagentoDataLayerEventHandler): void {
     this.removeEventListener(CUSTOM_URL, handler);
+  }
+
+  /**
+   * Unsubscribe from Data Layer Change event
+   */
+  dataLayerChange(handler: MagentoDataLayerEventHandler): void {
+    this.removeEventListener(DATA_LAYER_CHANGE, handler);
+  }
+
+  /**
+   * Unsubscribe from Data Layer Event event
+   */
+  dataLayerEvent(handler: MagentoDataLayerEventHandler): void {
+    this.removeEventListener(DATA_LAYER_EVENT, handler);
   }
 
   /**
