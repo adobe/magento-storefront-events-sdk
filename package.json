@@ -1,6 +1,6 @@
 {
-  "name": "@adobe/magento-data-layer-sdk",
-  "version": "0.0.5",
+  "name": "magento-data-layer-sdk",
+  "version": "0.0.7",
   "description": "SDK for working with events on a Magento storefront",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -10,12 +10,12 @@
   ],
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "prepublish": "npm run build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --check \"./**/*.{ts,tsx,js,css,json,md}\"",
     "format:fix": "prettier --write  \"./**/*.{ts,tsx,js,css,json,md}\"",
     "test": "jest --coverage",
+    "test:ci": "jest --ci",
     "test:watch": "jest --watch",
     "release:prod": "standard-version --dry-run",
     "release:stage": "standard-version --dry-run --prerelease stage"

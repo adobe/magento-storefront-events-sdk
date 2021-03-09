@@ -82,7 +82,7 @@ export const generateSearchResultsContext = (
 
 export const generateShopperContext = (
   overrides?: Partial<Shopper>
-): Shopper => ({ shopperId: "test", ...overrides });
+): Shopper => ({ shopperId: "guest", ...overrides });
 
 export const generateShoppingCartContext = (
   overrides?: Partial<ShoppingCart>

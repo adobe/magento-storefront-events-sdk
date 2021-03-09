@@ -4,5 +4,5 @@
  */
 
 export interface Shopper {
-  shopperId: string;
+  shopperId: "logged-in" | "guest";
 }

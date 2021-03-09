@@ -5,7 +5,11 @@
 
 import { MagentoDataLayer } from ".";
 import { ContextName } from "./types/contexts";
-import { EventName, MagentoDataLayerEventHandler } from "./types/events";
+import {
+  EventName,
+  ListenerOptions,
+  MagentoDataLayerEventHandler,
+} from "./types/events";
 
 export abstract class MagentoDataLayerBase {
   protected mdl!: MagentoDataLayer;
@@ -27,13 +31,14 @@ export abstract class MagentoDataLayerBase {
   // Add event listener to ACDL
   protected addEventListener(
     name: EventName,
-    handler: MagentoDataLayerEventHandler
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
   ): void {
     const wrappedHandler = (event: EventName) => handler(event, this.mdl);
 
     this.mdl._handlerMapper.set(handler, wrappedHandler);
-    window.adobeDataLayer.push((mdl: AdobeClientDataLayer) => {
-      mdl.addEventListener(name, wrappedHandler);
+    window.adobeDataLayer.push((dl: AdobeClientDataLayer) => {
+      dl.addEventListener(name, wrappedHandler, options);
     });
   }
   // Remove event listener from ACDL

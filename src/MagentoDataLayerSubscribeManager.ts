@@ -8,7 +8,10 @@ import { MagentoDataLayerBase } from "./MagentoDataLayerBase";
 import {
   ADD_TO_CART,
   CUSTOM_URL,
+  DATA_LAYER_CHANGE,
+  DATA_LAYER_EVENT,
   INITIATE_CHECKOUT,
+  ListenerOptions,
   MagentoDataLayerEventHandler,
   PAGE_ACTIVITY_SUMMARY,
   PAGE_VIEW,
@@ -33,57 +36,101 @@ export default class MagentoDataLayerSubscribeManager extends MagentoDataLayerBa
   /**
    * Subscribe to Add to Cart event
    */
-  addToCart(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(ADD_TO_CART, handler);
+  addToCart(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(ADD_TO_CART, handler, options);
   }
 
   /**
    * Subscribe to Custom Url event
    */
-  customUrl(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(CUSTOM_URL, handler);
+  customUrl(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(CUSTOM_URL, handler, options);
+  }
+
+  /**
+   * Subscribe to changes on the data layer
+   */
+  dataLayerChange(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(DATA_LAYER_CHANGE, handler, options);
+  }
+
+  /**
+   * Subscribe to all events on the data layer
+   */
+  dataLayerEvent(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(DATA_LAYER_EVENT, handler, options);
   }
 
   /**
    * Subscribe to Initiate Checkout event
    */
-  initiateCheckout(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(INITIATE_CHECKOUT, handler);
+  initiateCheckout(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(INITIATE_CHECKOUT, handler, options);
   }
 
   /**
    * Subscribe to Page Activity Summary event
    */
-  pageActivitySummary(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(PAGE_ACTIVITY_SUMMARY, handler);
+  pageActivitySummary(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(PAGE_ACTIVITY_SUMMARY, handler, options);
   }
 
   /**
    * Subscribe to Page View event
    */
-  pageView(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(PAGE_VIEW, handler);
+  pageView(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(PAGE_VIEW, handler, options);
   }
 
   /**
    * Subscribe to Product Page View event
    */
-  productPageView(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(PRODUCT_PAGE_VIEW, handler);
+  productPageView(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(PRODUCT_PAGE_VIEW, handler, options);
   }
 
   /**
    * Subscribe to Referrer Url event
    */
-  referrerUrl(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(REFERRER_URL, handler);
+  referrerUrl(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(REFERRER_URL, handler, options);
   }
 
   /**
    * Subscribe to Remove from Cart event
    */
-  removeFromCart(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(REMOVE_FROM_CART, handler);
+  removeFromCart(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(REMOVE_FROM_CART, handler, options);
   }
 
   /**
@@ -110,15 +157,21 @@ export default class MagentoDataLayerSubscribeManager extends MagentoDataLayerBa
   /**
    * Subscribe to Sign In event
    */
-  signIn(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(SIGN_IN, handler);
+  signIn(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(SIGN_IN, handler, options);
   }
 
   /**
    * Subscribe to Sign Out event
    */
-  signOut(handler: MagentoDataLayerEventHandler): void {
-    this.addEventListener(SIGN_OUT, handler);
+  signOut(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(SIGN_OUT, handler, options);
   }
 
   /**

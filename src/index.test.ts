@@ -16,6 +16,7 @@ import {
   generateShoppingCartContext,
   generateStorefrontInstanceContext,
 } from "./mocks";
+import { SHOPPER_CONTEXT } from "./types/contexts";
 import {
   ADD_TO_CART,
   CUSTOM_URL,
@@ -336,5 +337,91 @@ describe("events", () => {
     window.adobeDataLayer = [];
     expect(mdl.context.getCustomUrl()).toEqual({});
     expect(mdl.context.getReferrerUrl()).toEqual({});
+  });
+
+  test("subscribing to all data layer context changes", () => {
+    const handler = jest.fn();
+    mdl.subscribe.dataLayerChange(handler);
+    expect(handler).not.toHaveBeenCalled();
+    mdl.publish.addToCart();
+    expect(handler).not.toHaveBeenCalled();
+    mdl.context.setCustomUrl({ customUrl: "foo" });
+    // Currently setting a context clears out the context
+    // before setting the new context to ensure
+    // all of our updates are done immutably
+    // we may look at changing that behavior in the future
+    expect(handler).toHaveBeenCalledTimes(2);
+    expect(handler).toHaveBeenLastCalledWith(
+      {
+        "custom-url-context": { customUrl: "foo" },
+      },
+      expect.anything()
+    );
+
+    mdl.context.setShopper({ shopperId: "logged-in" });
+    expect(handler).toHaveBeenCalledTimes(4);
+    expect(handler).toHaveBeenLastCalledWith(
+      { "shopper-context": { shopperId: "logged-in" } },
+      expect.anything()
+    );
+  });
+
+  test("subscribing to all data layer context changes on specific path", () => {
+    const handler = jest.fn();
+    mdl.subscribe.dataLayerChange(handler, { path: SHOPPER_CONTEXT });
+    expect(handler).not.toHaveBeenCalled();
+    mdl.context.setCustomUrl({ customUrl: "foo" });
+    expect(handler).not.toHaveBeenCalled();
+    mdl.context.setShopper({ shopperId: "logged-in" });
+    expect(handler).toHaveBeenCalledTimes(2);
+    expect(handler).toHaveBeenLastCalledWith(
+      { "shopper-context": { shopperId: "logged-in" } },
+      expect.anything()
+    );
+  });
+
+  test("subscribing to all data layer events", () => {
+    const handler = jest.fn();
+    mdl.subscribe.dataLayerEvent(handler);
+    expect(handler).not.toHaveBeenCalled();
+    mdl.publish.addToCart();
+    mdl.publish.customUrl();
+    mdl.publish.initiateCheckout();
+    expect(handler).toHaveBeenCalledTimes(3);
+  });
+
+  test("Scope listener option limits event calls correctly", () => {
+    // Seed the data layer with a couple previous events
+    mdl.publish.addToCart();
+    mdl.publish.customUrl();
+    mdl.publish.pageView();
+
+    const handlerPast = jest.fn();
+    mdl.subscribe.dataLayerEvent(handlerPast, { scope: "past" });
+
+    const addToCartHandlerPast = jest.fn();
+    mdl.subscribe.addToCart(addToCartHandlerPast, { scope: "past" });
+
+    const handlerFuture = jest.fn();
+    mdl.subscribe.dataLayerEvent(handlerFuture, { scope: "future" });
+
+    const pageViewHandlerFuture = jest.fn();
+    mdl.subscribe.pageView(pageViewHandlerFuture, { scope: "future" });
+
+    const handlerAll = jest.fn();
+    mdl.subscribe.dataLayerEvent(handlerAll, { scope: "all" });
+
+    expect(handlerPast).toHaveBeenCalledTimes(3);
+    expect(addToCartHandlerPast).toHaveBeenCalledTimes(1);
+    expect(handlerFuture).not.toHaveBeenCalled();
+    expect(handlerAll).toHaveBeenCalledTimes(3);
+
+    mdl.publish.pageActivitySummary();
+    mdl.publish.pageView();
+
+    expect(handlerPast).toHaveBeenCalledTimes(3);
+    expect(handlerFuture).toHaveBeenCalledTimes(2);
+    expect(pageViewHandlerFuture).toHaveBeenCalledTimes(1);
+    expect(handlerAll).toHaveBeenCalledTimes(5);
   });
 });

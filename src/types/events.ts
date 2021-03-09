@@ -7,6 +7,8 @@ import { MagentoDataLayer } from "..";
 
 export const ADD_TO_CART = "add-to-cart";
 export const CUSTOM_URL = "custom-url";
+export const DATA_LAYER_CHANGE = "adobeDataLayer:change";
+export const DATA_LAYER_EVENT = "adobeDataLayer:event";
 export const INITIATE_CHECKOUT = "initiate-checkout";
 export const PAGE_ACTIVITY_SUMMARY = "page-activity-summary";
 export const PAGE_VIEW = "page-view";
@@ -23,6 +25,8 @@ export const UPDATE_CART = "update-cart";
 export type EventName =
   | typeof ADD_TO_CART
   | typeof CUSTOM_URL
+  | typeof DATA_LAYER_CHANGE
+  | typeof DATA_LAYER_EVENT
   | typeof INITIATE_CHECKOUT
   | typeof PAGE_ACTIVITY_SUMMARY
   | typeof PAGE_VIEW
@@ -40,3 +44,8 @@ export type MagentoDataLayerEventHandler = (
   eventName: EventName,
   mdl: MagentoDataLayer
 ) => void;
+
+export interface ListenerOptions {
+  path?: string;
+  scope?: "past" | "future" | "all";
+}
