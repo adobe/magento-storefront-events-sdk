@@ -23,6 +23,7 @@ import {
   INITIATE_CHECKOUT,
   PAGE_ACTIVITY_SUMMARY,
   PAGE_VIEW,
+  PLACE_ORDER,
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
@@ -195,6 +196,21 @@ describe("events", () => {
     expect(eventHandler).toHaveBeenCalledTimes(1);
     mdl.unsubscribe.pageView(eventHandler);
     mdl.publish.pageView();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+  });
+
+  test("place order", async () => {
+    const eventHandler = jest.fn((eventObj, mdl) => {
+      expect(eventObj.event).toEqual(PLACE_ORDER);
+      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    });
+
+    mdl.subscribe.placeOrder(eventHandler);
+    expect(eventHandler).not.toHaveBeenCalled();
+    mdl.publish.placeOrder();
+    expect(eventHandler).toHaveBeenCalledTimes(1);
+    mdl.unsubscribe.placeOrder(eventHandler);
+    mdl.publish.placeOrder();
     expect(eventHandler).toHaveBeenCalledTimes(1);
   });
 

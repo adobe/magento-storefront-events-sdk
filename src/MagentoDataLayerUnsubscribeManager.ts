@@ -11,6 +11,7 @@ import {
   MagentoDataLayerEventHandler,
   PAGE_ACTIVITY_SUMMARY,
   PAGE_VIEW,
+  PLACE_ORDER,
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
@@ -62,6 +63,13 @@ export default class MagentoDataLayerUnsubscribeManager extends MagentoDataLayer
    */
   pageView(handler: MagentoDataLayerEventHandler): void {
     this.removeEventListener(PAGE_VIEW, handler);
+  }
+
+  /**
+   * Unsubscribe from Place Order event
+   */
+  placeOrder(handler: MagentoDataLayerEventHandler): void {
+    this.removeEventListener(PLACE_ORDER, handler);
   }
 
   /**

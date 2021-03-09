@@ -15,6 +15,7 @@ import {
   MagentoDataLayerEventHandler,
   PAGE_ACTIVITY_SUMMARY,
   PAGE_VIEW,
+  PLACE_ORDER,
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
@@ -101,6 +102,16 @@ export default class MagentoDataLayerSubscribeManager extends MagentoDataLayerBa
     options?: ListenerOptions
   ): void {
     this.addEventListener(PAGE_VIEW, handler, options);
+  }
+
+  /**
+   * Subscribe to Place Order event
+   */
+  placeOrder(
+    handler: MagentoDataLayerEventHandler,
+    options?: ListenerOptions
+  ): void {
+    this.addEventListener(PLACE_ORDER, handler, options);
   }
 
   /**

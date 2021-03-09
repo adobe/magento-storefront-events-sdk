@@ -10,6 +10,7 @@ import {
   INITIATE_CHECKOUT,
   PAGE_ACTIVITY_SUMMARY,
   PAGE_VIEW,
+  PLACE_ORDER,
   PRODUCT_PAGE_VIEW,
   REFERRER_URL,
   REMOVE_FROM_CART,
@@ -61,6 +62,13 @@ export default class MagentoDataLayerPublishManager extends MagentoDataLayerBase
    */
   pageView(): void {
     this.pushEvent(PAGE_VIEW);
+  }
+
+  /**
+   * Publish Place Order event
+   */
+  placeOrder(): void {
+    this.pushEvent(PLACE_ORDER);
   }
 
   /**

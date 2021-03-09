@@ -12,6 +12,7 @@ export const DATA_LAYER_EVENT = "adobeDataLayer:event";
 export const INITIATE_CHECKOUT = "initiate-checkout";
 export const PAGE_ACTIVITY_SUMMARY = "page-activity-summary";
 export const PAGE_VIEW = "page-view";
+export const PLACE_ORDER = "place-order";
 export const PRODUCT_PAGE_VIEW = "product-page-view";
 export const REFERRER_URL = "referrer-url";
 export const REMOVE_FROM_CART = "remove-from-cart";
@@ -30,6 +31,7 @@ export type EventName =
   | typeof INITIATE_CHECKOUT
   | typeof PAGE_ACTIVITY_SUMMARY
   | typeof PAGE_VIEW
+  | typeof PLACE_ORDER
   | typeof PRODUCT_PAGE_VIEW
   | typeof REFERRER_URL
   | typeof REMOVE_FROM_CART
