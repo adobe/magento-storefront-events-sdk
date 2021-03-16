@@ -44,7 +44,7 @@ export type EventName =
 
 export type MagentoDataLayerEvent = {
   event: EventName;
-  context: MagentoDataLayerContext & CustomContext;
+  eventInfo: MagentoDataLayerContext & CustomContext;
 };
 
 export type MagentoDataLayerEventHandler = (

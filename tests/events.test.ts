@@ -45,7 +45,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: ADD_TO_CART,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -62,7 +62,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: CUSTOM_URL,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -79,7 +79,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: INITIATE_CHECKOUT,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -96,7 +96,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: PAGE_ACTIVITY_SUMMARY,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -113,7 +113,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: PAGE_VIEW,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -130,7 +130,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: PRODUCT_PAGE_VIEW,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -147,7 +147,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: REFERRER_URL,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -164,7 +164,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: REMOVE_FROM_CART,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -181,7 +181,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: SIGN_IN,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -198,7 +198,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: SIGN_OUT,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -215,7 +215,7 @@ describe("events", () => {
     const eventHandler = jest.fn((eventObj) => {
       expect(eventObj).toEqual({
         event: UPDATE_CART,
-        context: expect.any(Object),
+        eventInfo: expect.any(Object),
       });
     });
 
@@ -239,14 +239,14 @@ describe("events", () => {
     const secondContext = { shopperId: "logged-in" } as Shopper;
 
     const handler = (event: MagentoDataLayerEvent) => {
-      expect(event.context.shopperContext).toEqual(firstContext);
+      expect(event.eventInfo.shopperContext).toEqual(firstContext);
       expect(mdl.context.getShopper()).toEqual(firstContext);
     };
     const deferredHandler = (event: MagentoDataLayerEvent) => {
       // values don't match because the event context was created from
       // the context when the event was fired thus ensuring deferred
       // handlers receive "timely" data
-      expect(event.context.shopperContext).toEqual(firstContext);
+      expect(event.eventInfo.shopperContext).toEqual(firstContext);
       expect(mdl.context.getShopper()).toEqual(secondContext);
     };
     mdl.context.setShopper(firstContext);
@@ -265,7 +265,7 @@ describe("events", () => {
   test("event publisher passes user-defined context through to subscribers", () => {
     const myContext = { foo: "bar" };
     const handler = (event: MagentoDataLayerEvent) => {
-      expect(event.context).toEqual(myContext);
+      expect(event.eventInfo).toEqual(myContext);
     };
 
     mdl.subscribe.addToCart(handler);
@@ -278,7 +278,7 @@ describe("events", () => {
     const myContext = mdl.context.getReferrerUrl(); // using get/set to make sure our context matches exactly what referrer context would look like in the data layer
 
     const handler = (event: MagentoDataLayerEvent) => {
-      expect(event.context).toEqual({
+      expect(event.eventInfo).toEqual({
         [CUSTOM_URL_CONTEXT]: expect.anything(),
         [REFERRER_URL_CONTEXT]: myContext,
       });
@@ -288,5 +288,12 @@ describe("events", () => {
     // fire event with context to overwrite
     mdl.subscribe.pageView(handler);
     mdl.publish.pageView({ [REFERRER_URL_CONTEXT]: myContext });
+  });
+
+  test("event context data is not persisted in data layer", () => {
+    mdl.context.setCustomUrl({ customUrl: "test.com" });
+    mdl.publish.pageView();
+
+    expect(window.adobeDataLayer.getState()).not.toHaveProperty("eventInfo");
   });
 });

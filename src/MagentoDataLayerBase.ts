@@ -53,7 +53,10 @@ export abstract class MagentoDataLayerBase {
     window.adobeDataLayer.push((dl: AdobeClientDataLayer) => {
       dl.push({
         event,
-        context: { ...this.getContext<MagentoDataLayerContext>(), ...context },
+        eventInfo: {
+          ...this.getContext<MagentoDataLayerContext>(),
+          ...context,
+        },
       });
     });
   }
