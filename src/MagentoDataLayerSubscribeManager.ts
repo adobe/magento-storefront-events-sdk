@@ -26,14 +26,8 @@ import {
   SIGN_OUT,
   UPDATE_CART,
 } from "./types/events";
-import { MagentoDataLayer } from ".";
 
 export default class MagentoDataLayerSubscribeManager extends MagentoDataLayerBase {
-  constructor(mdl: MagentoDataLayer) {
-    super();
-    this.mdl = mdl;
-  }
-
   /**
    * Subscribe to Add to Cart event
    */

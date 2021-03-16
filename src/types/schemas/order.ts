@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface Order {
+export type Order = {
   appliedCouponCode: string;
   email: string;
   grandTotal: number;
@@ -14,4 +14,4 @@ export interface Order {
   salesTax: number;
   subtotalExcludingTax: number;
   subtotalIncludingTax: number;
-}
+};

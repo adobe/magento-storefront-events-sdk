@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface PageOffset {
+export type PageOffset = {
   eventType?: "pageUnload" | "visibilityHidden";
   maxXOffset: number;
   maxYOffset: number;
@@ -11,4 +11,4 @@ export interface PageOffset {
   minYOffset: number;
   ping_interval: number;
   pings: number;
-}
+};

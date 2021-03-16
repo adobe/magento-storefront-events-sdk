@@ -3,6 +3,6 @@
  * See COPYING.txt for license details.
  */
 
-export interface MagentoExtension {
+export type MagentoExtension = {
   magentoExtensionVersion: string; // TODO: should limit it to max 256 chars
-}
+};

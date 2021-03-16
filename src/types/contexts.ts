@@ -3,17 +3,17 @@
  * See COPYING.txt for license details.
  */
 
-export const CUSTOM_URL_CONTEXT = "custom-url-context";
-export const MAGENTO_EXTENSION_CONTEXT = "magento-extension-context";
-export const ORDER_CONTEXT = "order-context";
-export const PAGE_OFFSET_CONTEXT = "page-offset-context";
-export const PRODUCT_CONTEXT = "product-context";
-export const REFERRER_URL_CONTEXT = "referrer-url-context";
-export const SEARCH_INPUT_CONTEXT = "search-input-context";
-export const SEARCH_RESULTS_CONTEXT = "search-results-context";
-export const SHOPPER_CONTEXT = "shopper-context";
-export const SHOPPING_CART_CONTEXT = "shopping-cart-context";
-export const STOREFRONT_INSTANCE_CONTEXT = "storefront-instance-context";
+export const CUSTOM_URL_CONTEXT = "customUrlContext";
+export const MAGENTO_EXTENSION_CONTEXT = "magentoExtensionContext";
+export const ORDER_CONTEXT = "orderContext";
+export const PAGE_OFFSET_CONTEXT = "pageOffsetContext";
+export const PRODUCT_CONTEXT = "productContext";
+export const REFERRER_URL_CONTEXT = "referrerUrlContext";
+export const SEARCH_INPUT_CONTEXT = "searchInputContext";
+export const SEARCH_RESULTS_CONTEXT = "searchResultsContext";
+export const SHOPPER_CONTEXT = "shopperContext";
+export const SHOPPING_CART_CONTEXT = "shoppingCartContext";
+export const STOREFRONT_INSTANCE_CONTEXT = "storefrontInstanceContext";
 
 export type ContextName =
   | typeof CUSTOM_URL_CONTEXT
@@ -27,3 +27,9 @@ export type ContextName =
   | typeof SHOPPER_CONTEXT
   | typeof SHOPPING_CART_CONTEXT
   | typeof STOREFRONT_INSTANCE_CONTEXT;
+
+export type MagentoDataLayerContext = {
+  [K in ContextName]: unknown;
+};
+
+export type CustomContext = Record<string, unknown>;

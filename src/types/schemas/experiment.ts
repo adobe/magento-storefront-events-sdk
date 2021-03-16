@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface Experiment {
+export type Experiment = {
   experimentName: string;
   variantName: string;
-}
+};

@@ -3,6 +3,6 @@
  * See COPYING.txt for license details.
  */
 
-export interface ReferrerUrl {
+export type ReferrerUrl = {
   referrerUrl: string;
-}
+};

@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface Product {
+export type Product = {
   productId: number;
   name: string;
   sku: string | null;
@@ -32,4 +32,4 @@ export interface Product {
   };
   canonicalUrl?: string | null;
   mainImageUrl?: string | null;
-}
+};

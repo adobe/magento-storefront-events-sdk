@@ -27,11 +27,6 @@ import {
 import { MagentoDataLayer } from ".";
 
 export default class MagentoDataLayerUnsubscribeManager extends MagentoDataLayerBase {
-  constructor(mdl: MagentoDataLayer) {
-    super();
-    this.mdl = mdl;
-  }
-
   /**
    *  Unsubscribe from Add to Cart event
    */

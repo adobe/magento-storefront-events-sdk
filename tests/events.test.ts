@@ -5,9 +5,14 @@
 
 import mdl, { MagentoDataLayer } from "../src/index";
 import {
+  CUSTOM_URL_CONTEXT,
+  REFERRER_URL_CONTEXT,
+} from "../src/types/contexts";
+import {
   ADD_TO_CART,
   CUSTOM_URL,
   INITIATE_CHECKOUT,
+  MagentoDataLayerEvent,
   PAGE_ACTIVITY_SUMMARY,
   PAGE_VIEW,
   PRODUCT_PAGE_VIEW,
@@ -17,6 +22,7 @@ import {
   SIGN_OUT,
   UPDATE_CART,
 } from "../src/types/events";
+import { Shopper } from "../src/types/schemas/shopper";
 
 beforeAll(() => {
   // Forces magento data layer code to be bundled so that
@@ -36,9 +42,11 @@ test("data layer should exist", () => {
 
 describe("events", () => {
   test("add to cart", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(ADD_TO_CART);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: ADD_TO_CART,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.addToCart(eventHandler);
@@ -51,9 +59,11 @@ describe("events", () => {
   });
 
   test("custom url", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(CUSTOM_URL);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: CUSTOM_URL,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.customUrl(eventHandler);
@@ -66,9 +76,11 @@ describe("events", () => {
   });
 
   test("initiate checkout", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(INITIATE_CHECKOUT);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: INITIATE_CHECKOUT,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.initiateCheckout(eventHandler);
@@ -81,9 +93,11 @@ describe("events", () => {
   });
 
   test("page activity summary", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(PAGE_ACTIVITY_SUMMARY);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: PAGE_ACTIVITY_SUMMARY,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.pageActivitySummary(eventHandler);
@@ -96,9 +110,11 @@ describe("events", () => {
   });
 
   test("page view", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(PAGE_VIEW);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: PAGE_VIEW,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.pageView(eventHandler);
@@ -111,9 +127,11 @@ describe("events", () => {
   });
 
   test("product page view", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(PRODUCT_PAGE_VIEW);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: PRODUCT_PAGE_VIEW,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.productPageView(eventHandler);
@@ -126,9 +144,11 @@ describe("events", () => {
   });
 
   test("referrer url", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(REFERRER_URL);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: REFERRER_URL,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.referrerUrl(eventHandler);
@@ -141,9 +161,11 @@ describe("events", () => {
   });
 
   test("remove from cart", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(REMOVE_FROM_CART);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: REMOVE_FROM_CART,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.removeFromCart(eventHandler);
@@ -156,9 +178,11 @@ describe("events", () => {
   });
 
   test("sign in", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(SIGN_IN);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: SIGN_IN,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.signIn(eventHandler);
@@ -171,9 +195,11 @@ describe("events", () => {
   });
 
   test("sign out", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(SIGN_OUT);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: SIGN_OUT,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.signOut(eventHandler);
@@ -186,9 +212,11 @@ describe("events", () => {
   });
 
   test("update cart", async () => {
-    const eventHandler = jest.fn((eventObj, mdl) => {
-      expect(eventObj.event).toEqual(UPDATE_CART);
-      expect(mdl).toBeInstanceOf(MagentoDataLayer);
+    const eventHandler = jest.fn((eventObj) => {
+      expect(eventObj).toEqual({
+        event: UPDATE_CART,
+        context: expect.any(Object),
+      });
     });
 
     mdl.subscribe.updateCart(eventHandler);
@@ -204,5 +232,61 @@ describe("events", () => {
     window.adobeDataLayer = [];
     expect(mdl.context.getCustomUrl()).toEqual({});
     expect(mdl.context.getReferrerUrl()).toEqual({});
+  });
+
+  test("deferred handlers receive the same context object as synchronous handlers", async () => {
+    const firstContext = { shopperId: "guest" } as Shopper;
+    const secondContext = { shopperId: "logged-in" } as Shopper;
+
+    const handler = (event: MagentoDataLayerEvent) => {
+      expect(event.context.shopperContext).toEqual(firstContext);
+      expect(mdl.context.getShopper()).toEqual(firstContext);
+    };
+    const deferredHandler = (event: MagentoDataLayerEvent) => {
+      // values don't match because the event context was created from
+      // the context when the event was fired thus ensuring deferred
+      // handlers receive "timely" data
+      expect(event.context.shopperContext).toEqual(firstContext);
+      expect(mdl.context.getShopper()).toEqual(secondContext);
+    };
+    mdl.context.setShopper(firstContext);
+    mdl.subscribe.signIn(handler);
+    mdl.publish.signIn();
+    await new Promise<void>((res) => {
+      setTimeout(() => res());
+    });
+    mdl.context.setShopper(secondContext);
+    await new Promise<void>((res) => {
+      setTimeout(() => res());
+    });
+    mdl.subscribe.signIn(deferredHandler);
+  });
+
+  test("event publisher passes user-defined context through to subscribers", () => {
+    const myContext = { foo: "bar" };
+    const handler = (event: MagentoDataLayerEvent) => {
+      expect(event.context).toEqual(myContext);
+    };
+
+    mdl.subscribe.addToCart(handler);
+    mdl.publish.addToCart(myContext);
+  });
+
+  test("user-defined context merges with and overrides acdl context", () => {
+    mdl.context.setCustomUrl({ customUrl: "testing.edu" });
+    mdl.context.setReferrerUrl({ referrerUrl: "test.com" });
+    const myContext = mdl.context.getReferrerUrl(); // using get/set to make sure our context matches exactly what referrer context would look like in the data layer
+
+    const handler = (event: MagentoDataLayerEvent) => {
+      expect(event.context).toEqual({
+        [CUSTOM_URL_CONTEXT]: expect.anything(),
+        [REFERRER_URL_CONTEXT]: myContext,
+      });
+    };
+    // now set the context to something else
+    mdl.context.setReferrerUrl({ referrerUrl: "different.me" });
+    // fire event with context to overwrite
+    mdl.subscribe.pageView(handler);
+    mdl.publish.pageView({ [REFERRER_URL_CONTEXT]: myContext });
   });
 });

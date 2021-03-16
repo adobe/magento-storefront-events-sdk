@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface GiftCard {
+export type GiftCard = {
   giftCardCode: string; // TODO: should limit it to max 256 chars
   giftCardValue: number;
-}
+};

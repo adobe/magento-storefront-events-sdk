@@ -5,19 +5,19 @@
 
 import { Product } from "./product";
 
-export interface ShoppingCart {
+export type ShoppingCart = {
   id: string | null;
   items?: Array<ShoppingCartItem>;
   prices?: Array<Price>;
   totalQuantity: number;
-}
+};
 
-interface Price {
+type Price = {
   value: number;
   currency?: string;
-}
+};
 
-interface ShoppingCartItem {
+type ShoppingCartItem = {
   canApplyMsrp: boolean;
   foramttedPrice: string;
   id: string;
@@ -25,11 +25,11 @@ interface ShoppingCartItem {
   product: Product;
   configurableOptions?: Array<ConfigurableOption>;
   quantity?: number;
-}
+};
 
-interface ConfigurableOption {
+type ConfigurableOption = {
   id: number;
   optionLabel: string;
   valueId: number;
   valueLabel: string;
-}
+};

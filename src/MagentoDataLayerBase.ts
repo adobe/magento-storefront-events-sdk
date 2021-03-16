@@ -2,9 +2,11 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-import { MagentoDataLayer } from ".";
-import { ContextName } from "./types/contexts";
+import {
+  ContextName,
+  CustomContext,
+  MagentoDataLayerContext,
+} from "./types/contexts";
 import {
   EventName,
   ListenerOptions,
@@ -12,7 +14,6 @@ import {
 } from "./types/events";
 
 export abstract class MagentoDataLayerBase {
-  protected mdl!: MagentoDataLayer;
   // Set a context on ACDL
   protected setContext<T>(name: ContextName, context: T): void {
     window.adobeDataLayer.push({
@@ -34,11 +35,8 @@ export abstract class MagentoDataLayerBase {
     handler: MagentoDataLayerEventHandler,
     options?: ListenerOptions
   ): void {
-    const wrappedHandler = (event: EventName) => handler(event, this.mdl);
-
-    this.mdl._handlerMapper.set(handler, wrappedHandler);
     window.adobeDataLayer.push((dl: AdobeClientDataLayer) => {
-      dl.addEventListener(name, wrappedHandler, options);
+      dl.addEventListener(name, handler, options);
     });
   }
   // Remove event listener from ACDL
@@ -46,31 +44,17 @@ export abstract class MagentoDataLayerBase {
     name: EventName,
     handler: MagentoDataLayerEventHandler
   ): void {
-    if (!this.mdl._handlerMapper.get(handler)) {
-      if (
-        process.env.NODE_ENV === "development" ||
-        process.env.NODE_ENV === "test"
-      ) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          "You tried to remove a handler that has not been subscribed. This call to removeEventListener did not have any effect."
-        );
-      }
-      return;
-    }
-    window.adobeDataLayer.push((mdl: AdobeClientDataLayer) => {
-      mdl.removeEventListener(name, this.mdl._handlerMapper.get(handler));
-      this.mdl._handlerMapper.delete(handler);
+    window.adobeDataLayer.push((dl: AdobeClientDataLayer) => {
+      dl.removeEventListener(name, handler);
     });
   }
   // Push event to ACDL
-  protected pushEvent(event: EventName): void {
-    window.adobeDataLayer.push((mdl: AdobeClientDataLayer) => {
-      mdl.push({
+  protected pushEvent(event: EventName, context: CustomContext = {}): void {
+    window.adobeDataLayer.push((dl: AdobeClientDataLayer) => {
+      dl.push({
         event,
+        context: { ...this.getContext<MagentoDataLayerContext>(), ...context },
       });
     });
   }
 }
-
-// Need ability to overwrite vs merge contexts, specifically arrays

@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface StorefrontInstance {
+export type StorefrontInstance = {
   environtmentId: string;
   instanceId?: string;
   environment: string;
@@ -20,4 +20,4 @@ export interface StorefrontInstance {
   baseCurrencyCode: string;
   storeViewCurrencyCode: string;
   catalogExtensionVersion?: string | null;
-}
+};

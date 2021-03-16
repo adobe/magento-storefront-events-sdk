@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface BillingAddress {
+export type BillingAddress = {
   postalCode: string;
   countryCode: string;
   region?: string;
@@ -14,4 +14,4 @@ export interface BillingAddress {
   city?: string;
   phoneNumber?: string;
   saveInAddressBook?: boolean;
-}
+};

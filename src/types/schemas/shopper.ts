@@ -3,6 +3,6 @@
  * See COPYING.txt for license details.
  */
 
-export interface Shopper {
+export type Shopper = {
   shopperId: "logged-in" | "guest";
-}
+};

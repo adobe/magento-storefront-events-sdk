@@ -9,7 +9,6 @@ import MagentoDataLayerSubscribeManager from "./MagentoDataLayerSubscribeManager
 import MagentoDataLayerUnsubscribeManager from "./MagentoDataLayerUnsubscribeManager";
 
 export class MagentoDataLayer {
-  _handlerMapper = new WeakMap();
   constructor() {
     // ensure event array is available
     window.adobeDataLayer = window.adobeDataLayer || [];
@@ -18,22 +17,22 @@ export class MagentoDataLayer {
   /**
    * Methods for interacting with context data
    */
-  public context = new MagentoDataLayerContextManager(this);
+  public context = new MagentoDataLayerContextManager();
 
   /**
    * Methods for publishing events
    */
-  public publish = new MagentoDataLayerPublishManager(this);
+  public publish = new MagentoDataLayerPublishManager();
 
   /**
    * Methods for subscribing to events
    */
-  public subscribe = new MagentoDataLayerSubscribeManager(this);
+  public subscribe = new MagentoDataLayerSubscribeManager();
 
   /**
    * Methods for unsubscribing from events
    */
-  public unsubscribe = new MagentoDataLayerUnsubscribeManager(this);
+  public unsubscribe = new MagentoDataLayerUnsubscribeManager();
 }
 
 export default new MagentoDataLayer();

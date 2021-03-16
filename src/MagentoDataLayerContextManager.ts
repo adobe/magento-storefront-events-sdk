@@ -2,8 +2,6 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-import { MagentoDataLayer } from ".";
 import {
   MAGENTO_EXTENSION_CONTEXT,
   PAGE_OFFSET_CONTEXT,
@@ -33,11 +31,6 @@ import {
 } from "./types/schemas/";
 
 export default class MagentoDataLayerContextManager extends MagentoDataLayerBase {
-  constructor(mdl: MagentoDataLayer) {
-    super();
-    this.mdl = mdl;
-  }
-
   /**
    * Get url context
    */

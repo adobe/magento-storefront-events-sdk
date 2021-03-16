@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-interface SearchResultItem {
+type SearchResultItem = {
   title: string;
   url: string;
   rank: number;
@@ -11,12 +11,12 @@ interface SearchResultItem {
   sku?: string;
   imageUrl?: string;
   price?: string;
-}
+};
 
-export interface SearchResults {
+export type SearchResults = {
   products: Array<SearchResultItem>;
   suggestions?: Array<SearchResultItem>;
   categories?: Array<SearchResultItem>;
   page: number;
   perPage: number;
-}
+};

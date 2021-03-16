@@ -2,8 +2,6 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
-import { MagentoDataLayer } from ".";
 import {
   ADD_TO_CART,
   CUSTOM_URL,
@@ -22,115 +20,111 @@ import {
   UPDATE_CART,
 } from "./types/events";
 import { MagentoDataLayerBase } from "./MagentoDataLayerBase";
+import { CustomContext } from "./types/contexts";
 
 export default class MagentoDataLayerPublishManager extends MagentoDataLayerBase {
-  constructor(mdl: MagentoDataLayer) {
-    super();
-    this.mdl = mdl;
-  }
-
   /**
    * Publish Add to Cart event
    */
-  addToCart(): void {
-    this.pushEvent(ADD_TO_CART);
+  addToCart(context?: CustomContext): void {
+    this.pushEvent(ADD_TO_CART, context);
   }
 
   /**
    * Publish Custom Url event
    */
-  customUrl(): void {
-    this.pushEvent(CUSTOM_URL);
+  customUrl(context?: CustomContext): void {
+    this.pushEvent(CUSTOM_URL, context);
   }
 
   /**
    * Publish Initiate Checkout event
    */
-  initiateCheckout(): void {
-    this.pushEvent(INITIATE_CHECKOUT);
+  initiateCheckout(context?: CustomContext): void {
+    this.pushEvent(INITIATE_CHECKOUT, context);
   }
 
   /**
    * Publish Page Activity Summary event
    */
-  pageActivitySummary(): void {
-    this.pushEvent(PAGE_ACTIVITY_SUMMARY);
+  pageActivitySummary(context?: CustomContext): void {
+    this.pushEvent(PAGE_ACTIVITY_SUMMARY, context);
   }
 
   /**
    * Publish Page View event
    */
-  pageView(): void {
-    this.pushEvent(PAGE_VIEW);
+  pageView(context?: CustomContext): void {
+    this.pushEvent(PAGE_VIEW, context);
   }
 
   /**
    * Publish Place Order event
    */
-  placeOrder(): void {
-    this.pushEvent(PLACE_ORDER);
+  placeOrder(context?: CustomContext): void {
+    this.pushEvent(PLACE_ORDER, context);
   }
 
   /**
    * Publish Product Page View event
    */
-  productPageView(): void {
-    this.pushEvent(PRODUCT_PAGE_VIEW);
+  productPageView(context?: CustomContext): void {
+    this.pushEvent(PRODUCT_PAGE_VIEW, context);
   }
 
   /**
    * Publish Referrer Url event
    */
-  referrerUrl(): void {
-    this.pushEvent(REFERRER_URL);
+  referrerUrl(context?: CustomContext): void {
+    this.pushEvent(REFERRER_URL, context);
   }
 
   /**
    * Publish Remove from Cart event
    */
-  removeFromCart(): void {
-    this.pushEvent(REMOVE_FROM_CART);
+  removeFromCart(context?: CustomContext): void {
+    this.pushEvent(REMOVE_FROM_CART, context);
   }
 
   /**
    * Publish Search Request Sent event
    */
-  searchRequestSent(): void {
-    this.pushEvent(SEARCH_REQUEST_SENT);
+  searchRequestSent(context?: CustomContext): void {
+    this.pushEvent(SEARCH_REQUEST_SENT, context);
   }
 
   /**
    * Publish Search Response Received event
    */
-  searchResponseReceived(): void {
-    this.pushEvent(SEARCH_RESPONSE_RECEIVED);
+  searchResponseReceived(context?: CustomContext): void {
+    this.pushEvent(SEARCH_RESPONSE_RECEIVED, context);
   }
 
   /**
    * Publish Search Result Click event
    */
-  searchResultClick(): void {
-    this.pushEvent(SEARCH_RESULT_CLICK);
+  searchResultClick(context?: CustomContext): void {
+    this.pushEvent(SEARCH_RESULT_CLICK, context);
   }
 
   /**
    * Publish Sign In event
    */
-  signIn(): void {
-    this.pushEvent(SIGN_IN);
+  signIn(context?: CustomContext): void {
+    this.pushEvent(SIGN_IN, context);
   }
 
   /**
    * Publish Sign Out event
    */
-  signOut(): void {
-    this.pushEvent(SIGN_OUT);
+  signOut(context?: CustomContext): void {
+    this.pushEvent(SIGN_OUT, context);
   }
 
   /**
    * Publish Cart Update events
    */
-  updateCart(): void {
-    this.pushEvent(UPDATE_CART);
+  updateCart(context?: CustomContext): void {
+    this.pushEvent(UPDATE_CART, context);
   }
 }

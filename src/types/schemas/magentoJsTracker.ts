@@ -3,7 +3,7 @@
  * See COPYING.txt for license details.
  */
 
-export interface MagentoJsTracker {
+export type MagentoJsTracker = {
   magentoJsVersion: string;
   magentoJsBuild: string;
-}
+};
