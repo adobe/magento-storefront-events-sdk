@@ -39,7 +39,7 @@ pipeline {
 
         stage("Build QA") {
             when {
-                branch "jenkins"
+                branch "master"
             }
 
             steps {
@@ -51,7 +51,7 @@ pipeline {
 
         stage("Deploy QA") {
             when {
-                branch "jenkins"
+                branch "master"
             }
 
             steps {
