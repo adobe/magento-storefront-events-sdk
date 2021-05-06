@@ -51,7 +51,7 @@ pipeline {
 
         stage("Deploy QA") {
             when {
-                branch "master"
+                branch "jenkins"
             }
 
             steps {
